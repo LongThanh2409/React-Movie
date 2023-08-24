@@ -2,9 +2,10 @@ import { routesUser } from "../../config/router"
 import { Link } from "react-router-dom"
 import Logo from "../../assets/Logo.svg"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faPlus } from "@fortawesome/free-solid-svg-icons"
+import { faBars, faPlus, faTimes } from "@fortawesome/free-solid-svg-icons"
 import { faBell } from "@fortawesome/free-solid-svg-icons/faBell"
-import { Tooltip } from "antd"
+import { Drawer, Tooltip } from "antd"
+import { useState } from "react"
 const Headers = () => {
     const NavMenu = [
         { path: "", title: "Movies" },
@@ -13,6 +14,15 @@ const Headers = () => {
         { path: "", title: "More" },
 
     ]
+    const [open, setOpen] = useState(false);
+
+    const showDrawer = () => {
+        setOpen(true);
+    };
+
+    const onClose = () => {
+        setOpen(false);
+    };
     return (
         <>
             <div className="header w-full h-16 bg-[#0d253f] flex items-center justify-center">
@@ -23,14 +33,13 @@ const Headers = () => {
                                 <img className="w-full h-full" src={Logo} alt="Logo" />
                             </Link>
                         </div>
-                        <div className="nav-wrapper">
+                        <div className="nav-wrapper hidden xl:block">
                             <ul className="flex">
                                 {NavMenu.map((item, index) =>
-                                    <Tooltip placement="bottom"
+                                    <Tooltip key={index} placement="bottom"
                                         title={
                                             <div className="py-1 pl-2 pr-10 hover:bg-gray-50 rounded-sm">
                                                 <li className="text-black mr-4 px-2  cursor-pointer "> {item.title}</li>
-
                                             </div>
                                         }
                                         arrow={false}
@@ -44,7 +53,7 @@ const Headers = () => {
                             </ul>
                         </div>
                     </div>
-                    <div className="sub-action flex items-center">
+                    <div className="sub-action xl:flex items-center hidden">
                         <Tooltip
                             title={
                                 <div>
@@ -75,10 +84,44 @@ const Headers = () => {
                             color="#fff"
                         >
                             <div className="user mr-8 cursor-pointer">
-                                <img className="w-8 h-8 rounded-full" src="https://i.pravatar.cc/300" alt="Avatar" />
+                                {/* <img className="w-8 h-8 rounded-full" src="https://i.pravatar.cc/300" alt="Avatar" /> */}
+                                <img className="w-8 h-8 rounded-full" src="https://tranh3mien.vn/wp-content/uploads/2023/07/Tin-tuc-Hinh-anh-Clip-Tran-Ha-Linh-30-video-moi-nhat-3.jpg" alt="Avatar" />
+
                             </div>
                         </Tooltip>
 
+                    </div>
+                    <div className="menu-moblie xl:hidden">
+                        <div onClick={showDrawer} className="menu-moblie__wrapper pr-10">
+                            <FontAwesomeIcon className="text-3xl text-white" icon={faBars} />
+                        </div>
+                        <Drawer title={
+                            <h1 className="text-xl text-white">Menu Mobile</h1>
+                        }
+                            /// style icon close color white
+                            closeIcon={<FontAwesomeIcon className="text-white text-2xl" icon={faTimes} />}
+                            width={300} zIndex={0} style={{ backgroundColor: "#0d253f", zIndex: "2" }} placement="right" onClose={onClose} open={open}>
+                            <div className="nav-wrapper ">
+                                <ul className="">
+                                    {NavMenu.map((item, index) =>
+                                        <Tooltip key={index} placement="bottom"
+                                            title={
+                                                <div className="py-1 pl-2 pr-10 hover:bg-gray-50 rounded-sm">
+                                                    <li className="text-black mr-4 px-2  cursor-pointer "> {item.title}</li>
+
+                                                </div>
+                                            }
+                                            arrow={false}
+                                            style={{ color: "blue" }}
+                                            color="#fff"
+                                        >
+                                            <li className="text-white mr-4 px-2 pt-2 font-semibold cursor-pointer" key={index}>{item.title}</li>
+                                        </Tooltip>
+
+                                    )}
+                                </ul>
+                            </div>
+                        </Drawer>
                     </div>
                 </div>
             </div>

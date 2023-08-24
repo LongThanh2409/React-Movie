@@ -1,0 +1,48 @@
+.scroll-trending::-webkit-scrollbar {
+    background-color: transparent;
+    height: 10px;
+}
+
+.scroll-trending::-webkit-scrollbar-thumb {
+    background-image: linear-gradient(to right, #f12711, #f5af19);
+    border-radius: 20px;
+    height: 1px;
+}
+
+.afterTrending::after {
+    content: "";
+    width: 60px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0)0, #fff 100%);
+    will-change: opacity;
+    pointer-events: none;
+}
+
+.ant-segmented {
+    padding: 0 !important;
+}
+
+.ant-segmented-item {
+    width: 100px !important;
+}
+
+.ant-segmented-item-selected {
+    color: white !important;
+    background-color: #0d253f !important;
+}
+
+.ant-segmented-thumb {
+    background-color: #0d253f !important;
+}
+
+.selector-trailers .ant-segmented-item-selected {
+    color: white !important;
+    background-color: rgb(32, 225, 109) !important;
+}
+
+.selector-trailers .ant-segmented-thumb {
+    background-color: rgb(142, 229, 11) !important;
+}
